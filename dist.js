@@ -1,7 +1,7 @@
 var handlebars  = require('handlebars');
 var fs          = require('fs');
 var path        = require('path');
-var p           = require('../package.json');
+var p           = require('../../package.json');
 
 var DistBuilder = function() {
     var _ = new DistBuilder.Private();

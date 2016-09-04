@@ -179,7 +179,7 @@ DistBuilder.Private.prototype = {
         data.name                      = p.name;
         data.version                   = p.version;
 
-        if (p.dependencies.mixitup) {
+        if (p.dependencies && p.dependencies.mixitup) {
             data.coreVersion = p.dependencies.mixitup;
         }
 

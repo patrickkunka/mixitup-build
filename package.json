@@ -1,0 +1,11 @@
+{
+  "name": "mixitup-build",
+  "version": "0.0.0",
+  "author": "KunkaLabs Limited",
+  "private": true,
+  "main": "./dist.js",
+  "devDependencies": {
+    "handlebars": "^4.0.5",
+    "jsdoc-parse": "^1.2.6"
+  }
+}

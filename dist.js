@@ -37,6 +37,10 @@ DistBuilder.Private.prototype = {
 
         console.log('[MixItUp-DistBuilder] Initialising build...');
 
+        self.hbs.registerHelper('raw', function(options) {
+            return options.fn();
+        });
+
         self.readPartials.call(self)
             .then(function(partials) {
                 return self.registerPartials(partials);

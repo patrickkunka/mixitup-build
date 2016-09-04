@@ -32,7 +32,7 @@ DistBuilder.Private.prototype = {
         var self = this;
 
         self.hbs          = handlebars.create();
-        self.root         = path.join('../../', process.cwd());
+        self.root         = process.cwd();
         self.startTime    = Date.now();
 
         console.log('[MixItUp-DistBuilder] Initialising build...');

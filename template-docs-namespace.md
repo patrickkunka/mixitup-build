@@ -4,13 +4,26 @@
 
 {{{doclet.description}}}
 
+{{#if since}}
+**Version added: {{since}}**
+{{/if}}
+
+{{#each codeExamples}}
+{{#if caption}}{{caption}}{{/if}}
+```js{{code}}
+```{{/each}}
+
 ## Members
 
 {{#each members}}
 ### <a id="{{id}}">{{memberof}}.{{name}}</a>
 
+{{#if since}}
+**Version added: {{since}}**
+{{/if}}
+
 {{#if syntax}}```js
-{{syntax}}
+{{syntax.code}}
 ```{{/if}}
 
 {{{description}}}
@@ -29,7 +42,8 @@
 |`{{#each type.names}}{{{this}}}{{/each}}`{{#if defaultvalue}}| `{{{defaultvalue}}}`{{/if}}
 {{/if}}
 
-{{#if since}}
-**Version added: {{since}}**
-{{/if}}
+{{#each this.codeExamples}}
+> {{#if this.caption}}{{{this.caption}}}{{/if}}
+```js{{{this.code}}}
+```{{/each}}
 {{/each}}

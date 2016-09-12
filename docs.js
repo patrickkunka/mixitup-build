@@ -85,6 +85,10 @@ DocsBuilder.Private.prototype = {
             ) {
                 Object.assign(model, doclet);
 
+                if (doclet.examples) {
+                    model.examples = self.parseExamples(doclet.examples);
+                }
+
                 namespace.members.push(model);
             } else if (doclet.scope === 'global') {
                 Object.assign(model, doclet);
@@ -92,6 +96,39 @@ DocsBuilder.Private.prototype = {
                 self.factory = model;
             }
         });
+    },
+
+    /**
+     * @param   {string[]} examples
+     * @return  {DocsBuilder.Example[]}
+     */
+
+    parseExamples: function(examples) {
+        var re      = /<caption>([^<\/]+)<\/caption>\n/g,
+            example = null,
+            capture = null,
+            output  = [],
+            caption = '',
+            code    = '',
+            i       = -1;
+
+        for (i = 0; i < examples.length; i++) {
+            code = examples[i];
+
+            capture = re.exec(code);
+            caption = capture ? capture[1] : '';
+            code    = code.replace(re, '');
+            example = new DocsBuilder.Example();
+
+            example.caption = caption;
+            example.code    = code;
+
+            output.push(example);
+
+            re.lastIndex = 0;
+        }
+
+        return output;
     },
 
     readTemplates: function() {
@@ -134,7 +171,7 @@ DocsBuilder.Private.prototype = {
 
                     tasks.push(new Promise(function(resolve, reject) {
                         fs.readFile(filePath, function(err, data) {
-                            if (err) reject(err);
+                            if (err) reject;
 
                             resolve(data);
                         });
@@ -198,6 +235,13 @@ DocsBuilder.Namespace = function(doclet) {
     Object.seal(this);
 };
 
+DocsBuilder.Example = function() {
+    this.caption     = '';
+    this.code        = '';
+
+    Object.seal(this);
+};
+
 DocsBuilder.Doclet = function() {
     this.id             = '';
     this.name           = '';
@@ -249,8 +293,6 @@ DocsBuilder.Doclet = function() {
             }
         }
     });
-
-    Object.seal(this);
 };
 
 module.exports = new DocsBuilder();

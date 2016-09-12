@@ -96,7 +96,7 @@ DocsBuilder.Private.prototype = {
 
     readTemplates: function() {
         var self        = this,
-            dirPath     = path.join(self.root, 'build'),
+            dirPath     = __dirname,
             fileNames   = [];
 
         return new Promise(function(resolve, reject) {
@@ -130,11 +130,11 @@ DocsBuilder.Private.prototype = {
                 fileNames = filtered;
 
                 fileNames.forEach(function(fileName) {
-                    var filePath = path.join(self.root, 'build', fileName);
+                    var filePath = path.join(dirPath, fileName);
 
                     tasks.push(new Promise(function(resolve, reject) {
                         fs.readFile(filePath, function(err, data) {
-                            if (err) reject;
+                            if (err) reject(err);
 
                             resolve(data);
                         });

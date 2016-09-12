@@ -104,7 +104,7 @@ DocsBuilder.Private.prototype = {
      */
 
     parseExamples: function(examples) {
-        var re      = /<caption>([^<\/]+)<\/caption>\n/g,
+        var re      = /<caption>([^<]+)<\/caption>\n/g,
             example = null,
             capture = null,
             output  = [],

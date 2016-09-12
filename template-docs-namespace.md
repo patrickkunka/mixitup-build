@@ -8,11 +8,6 @@
 **Version added: {{since}}**
 {{/if}}
 
-{{#each codeExamples}}
-{{#if caption}}{{caption}}{{/if}}
-```js{{code}}
-```{{/each}}
-
 ## Members
 
 {{#each members}}
@@ -44,6 +39,10 @@
 
 {{#each this.codeExamples}}
 > {{#if this.caption}}{{{this.caption}}}{{/if}}
-```js{{{this.code}}}
-```{{/each}}
+
+```js
+{{{this.code}}}
+```
+{{/each}}
+
 {{/each}}

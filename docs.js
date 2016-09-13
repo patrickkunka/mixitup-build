@@ -52,7 +52,7 @@ DocsBuilder.Private.prototype = {
             var input = '';
 
             parse({
-                src: './dist/mixitup.js'
+                src: './dist/' + DocsBuilder.getParameter('-s')
             })
                 .on('data', function(data) {
                     input += data;
@@ -226,6 +226,26 @@ DocsBuilder.Private.prototype = {
                 console.log('[MixItUp-DocsBuilder] ' + totalFiles + ' documentation files generated in ' + duration + 'ms');
             });
     }
+};
+
+/**
+ * @static
+ * @param   {string}    param
+ * @return  {string}
+ */
+
+DocsBuilder.getParameter = function(param) {
+    var params      = process.argv,
+        paramIndex  = -1,
+        value       = '';
+
+    paramIndex = params.indexOf(param);
+
+    if (paramIndex > -1) {
+        value = params[paramIndex + 1];
+    }
+
+    return value || '';
 };
 
 DocsBuilder.Namespace = function(doclet) {

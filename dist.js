@@ -89,7 +89,7 @@ DistBuilder.Private.prototype = {
             })
             .then(function(list) {
                 var filtered = list.filter(function(fileName) {
-                    return fileName.charAt(0) !== '.' && fileName.indexOf('.js') > -1;
+                    return fileName.charAt(0) !== '.' && fileName.match(/(.js|.hbs)$/);
                 });
 
                 return filtered;
@@ -123,7 +123,7 @@ DistBuilder.Private.prototype = {
         return Promise.all(tasks)
             .then(function(buffers) {
                 buffers.forEach(function(buffer, i) {
-                    var slug        = fileNames[i].replace('.js', ''),
+                    var slug        = fileNames[i].replace(/(.js|.hbs)$/, ''),
                         contents    = '';
 
                     contents = self.cleanPartial(buffer.toString());

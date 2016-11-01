@@ -1,7 +1,9 @@
 {
   "name": "mixitup-build",
   "version": "0.0.0",
-  "author": "KunkaLabs Limited",
+  "author": {
+    "name": "KunkaLabs Limited"
+  },
   "private": true,
   "main": "./dist.js",
   "devDependencies": {

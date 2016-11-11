@@ -1,8 +1,10 @@
-#{{name}}
+#{{name}}()
 
-{{#if syntax}}```js
-{{syntax}}
-```{{/if}}
+{{#if since}}
+*Version added: {{since}}*
+{{/if}}
+
+{{#if syntax}}`{{syntax.code}}`{{/if}}
 
 {{{description}}}
 
@@ -12,6 +14,10 @@
 |Param   |`{{#each type}}{{#each this}}{{{this}}}{{#unless @last}}, {{/unless}}{{/each}}{{/each}}` | `{{#if optional}}[{{name}}]{{else}}{{name}}{{/if}}` | {{{description}}}
 {{/each}}|Returns |{{#each returns}}`{{#each type}}{{#each this}}{{{this}}}{{#unless @last}}, {{/unless}}{{/each}}{{/each}}` | {{{description}}}{{/each}}
 
-{{#if since}}
-**Version added: {{since}}**
-{{/if}}
+{{#each this.codeExamples}}
+{{#if this.caption}}##### {{{this.caption}}}{{/if}}
+
+```js
+{{{this.code}}}
+```
+{{/each}}

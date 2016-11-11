@@ -15,6 +15,7 @@ DocsBuilder.Private = function() {
     this.startTime  = -1;
     this.factory    = null;
     this.namespaces = {};
+    this.subNamespaces = {};
     this.templates  = {};
     this.root       = '';
     this.hbs        = null;
@@ -71,29 +72,45 @@ DocsBuilder.Private.prototype = {
 
         doclets.forEach(function(doclet) {
             if (doclet.kind === 'namespace') {
-                self.namespaces[doclet.id] = new DocsBuilder.Namespace(doclet);
+                if (doclet.memberof === 'mixitup') {
+                    self.namespaces[doclet.id] = new DocsBuilder.Namespace(doclet);
+                } else {
+                    self.subNamespaces[doclet.id] = new DocsBuilder.Namespace(doclet);
+                }
             }
         });
 
         doclets.forEach(function(doclet) {
-            var namespace = null,
-                model     = new DocsBuilder.Doclet();
+            var parentNamespace = null,
+                model           = new DocsBuilder.Doclet();
 
-            if (
+            if (doclet.kind === 'namespace' && typeof (parentNamespace = self.namespaces[doclet.memberof]) !== 'undefined') {
+                // Nested namespace
+
+                parentNamespace.members.push(self.subNamespaces[doclet.id]);
+            } else if (
                 doclet.memberof &&
-                typeof (namespace = self.namespaces[doclet.memberof]) !== 'undefined'
+                typeof (parentNamespace = (self.namespaces[doclet.memberof] || self.subNamespaces[doclet.memberof])) !== 'undefined'
             ) {
+                // Member or Method
+
                 Object.assign(model, doclet);
 
                 if (doclet.examples) {
                     model.examples = self.parseExamples(doclet.examples);
                 }
 
-                namespace.members.push(model);
+                parentNamespace.members.push(model);
             } else if (doclet.scope === 'global') {
+                // Factory
+
                 Object.assign(model, doclet);
 
                 self.factory = model;
+
+                if (doclet.examples) {
+                    model.examples = self.parseExamples(doclet.examples);
+                }
             }
         });
     },
@@ -249,8 +266,9 @@ DocsBuilder.getParameter = function(param) {
 };
 
 DocsBuilder.Namespace = function(doclet) {
-    this.doclet     = doclet;
-    this.members    = [];
+    this.doclet         = doclet;
+    this.members        = [];
+    this.isNamespace    = true;
 
     Object.seal(this);
 };

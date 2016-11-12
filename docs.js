@@ -37,6 +37,10 @@ DocsBuilder.Private.prototype = {
                 self.hbs        = handlebars.create();
                 self.startTime  = Date.now();
 
+                self.hbs.registerHelper('raw', function(options) {
+                    return options.fn();
+                });
+
                 console.log('[MixItUp-DocsBuilder] Initialising build...');
 
                 return self.parseScript();

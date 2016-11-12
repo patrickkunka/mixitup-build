@@ -46,7 +46,7 @@
 {{/if}}
 
 {{#each this.codeExamples}}
-{{#if this.caption}}##### {{{this.caption}}}{{/if}}
+{{#if this.caption}}###### {{{this.caption}}}{{/if}}
 
 ```js
 {{{this.code}}}
@@ -80,7 +80,7 @@
 {{/if}}
 
 {{#each this.codeExamples}}
-{{#if this.caption}}##### {{{this.caption}}}{{/if}}
+{{#if this.caption}}###### {{{this.caption}}}{{/if}}
 
 ```js
 {{{this.code}}}

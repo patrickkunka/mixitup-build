@@ -182,6 +182,7 @@ DistBuilder.Private.prototype = {
         data.author                    = p.author;
         data.name                      = p.name;
         data.version                   = p.version;
+        data.description               = p.description;
 
         if (p.dependencies && p.dependencies.mixitup) {
             data.coreVersion = p.dependencies.mixitup;
@@ -276,6 +277,7 @@ DistBuilder.Model = function() {
     this.title                      = '';
     this.author                     = '';
     this.name                       = '';
+    this.description                = '';
     this.version                    = '';
     this.coreVersion                = '';
     this.beginCopyrightYear         = '';

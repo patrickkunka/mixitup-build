@@ -6,7 +6,7 @@
   },
   "private": true,
   "main": "./dist.js",
-  "devDependencies": {
+  "dependencies": {
     "handlebars": "^4.0.5",
     "jsdoc-parse": "^1.2.6"
   }

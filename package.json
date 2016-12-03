@@ -9,11 +9,5 @@
   "devDependencies": {
     "handlebars": "^4.0.5",
     "jsdoc-parse": "^1.2.6"
-  },
-  "gitHead": "58ac3e1102c5d06d14f5e845ec6c0295eb0ea663",
-  "readme": "ERROR: No README data found!",
-  "_id": "mixitup-build@0.0.0",
-  "_shasum": "d89ba8653e8637aeee445ecabedce4477c98f922",
-  "_from": "git://github.com/patrickkunka/mixitup-build.git",
-  "_resolved": "git://github.com/patrickkunka/mixitup-build.git#58ac3e1102c5d06d14f5e845ec6c0295eb0ea663"
+  }
 }

@@ -139,6 +139,8 @@ DocsBuilder.Private.prototype = {
             capture = re.exec(code);
             caption = capture ? capture[1] : '';
             code    = code.replace(re, '');
+            code    = code.replace(/&lt;/g, '<');
+            code    = code.replace(/&gt;/g, '>');
             example = new DocsBuilder.Example();
 
             example.caption = caption;
